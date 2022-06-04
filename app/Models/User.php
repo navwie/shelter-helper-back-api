@@ -35,5 +35,10 @@ class User extends Model implements Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function shelters(): BelongsToMany
+    {
+        return $this->belongsToMany(Shelter::class, 'users_shelters');
+    }
 }
 

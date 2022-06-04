@@ -4,19 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Animal extends Model
 {
     use HasFactory;
 
-    private $ID_shelter;
-    private $Name;
-    private $Age;
-    private $Sex;
-    private $Img_URL;
-    private $Type;
-    private $Weight;
+    protected $fillable = [
+        'name',
+        'birthday',
+        'gender',
+        'photo',
+        'type',
+        'weight',
+        'shelter_id',
+        'sterilized',
+        'is_archive',
+        'description'
+    ];
 
-
-    protected $table = 'Animal';
+    public function shelter(): belongsTo
+    {
+        return $this->belongsTo(Shelter::class, 'shelter_id');
+    }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\API\UserRequest;
+use App\Http\Requests\Api\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -14,7 +14,7 @@ class UserController extends Controller
     public function show($id)
     {
         return response()->json([
-            User::findOrFail($id)
+            User::with("shelters")->findOrFail($id)
         ],
             Response::HTTP_OK
         );
@@ -31,4 +31,5 @@ class UserController extends Controller
         return new JsonResponse([
             'updated' => true
         ], Response::HTTP_OK);
-    }}
+    }
+}
