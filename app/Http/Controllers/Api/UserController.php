@@ -8,10 +8,11 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\App;
 
 class UserController extends Controller
 {
-    public function show($id)
+    public function show(string $locale, $id)
     {
         return response()->json([
             User::with("shelters")->findOrFail($id)
@@ -20,7 +21,7 @@ class UserController extends Controller
         );
     }
 
-    public function update(UserRequest $request, $id): JsonResponse
+    public function update(string $locale, UserRequest $request, $id): JsonResponse
     {
         $current = User::FindOrFail($id);
 

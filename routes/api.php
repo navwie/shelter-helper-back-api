@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,14 +20,13 @@ use App\Http\Controllers\Api\AuthController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::group(['middleware' => ['cors']], function () {
+Route::group(['middleware' => ['cors', 'locale']], function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
 
     Route::get('/user/{id}', [UserController::class, 'show']);
     Route::put('/user/{id}', [UserController::class, 'update']);
-
 
     Route::post('/shelter', [ShelterController::class, 'create'])->middleware('auth:api');
     Route::put('/shelter/{id}', [ShelterController::class, 'update'])->middleware('auth:api');

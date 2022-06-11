@@ -23,7 +23,7 @@ class ShelterController extends Controller
         );
     }
 
-    public function create(Request $request):JsonResponse
+    public function create(string $locale, ShelterRequest $request):JsonResponse
     {
         $shelterData = $request->except('user_id');
 
@@ -57,7 +57,7 @@ class ShelterController extends Controller
     }
 
 
-    public function show($id)
+    public function show(string $locale, $id)
     {
         return response()->json([
             Shelter::with("announcements")->findOrFail($id)
@@ -67,7 +67,7 @@ class ShelterController extends Controller
     }
 
 
-    public function update(ShelterRequest $request, $id): JsonResponse
+    public function update(string $locale, ShelterRequest $request, $id): JsonResponse
     {
         $current = Shelter::findOrFail($id);
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\AnimalRequest;
 use App\Models\Animal;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AnimalController extends Controller
 {
-    public function index($id): JsonResponse
+    public function index(string $locale, int $id): JsonResponse
     {
         $shelter_id_from_front = $id;
         return response()->json([
@@ -43,7 +44,7 @@ class AnimalController extends Controller
         );
     }
 
-    public function booked(Request $request, int $id): JsonResponse
+    public function booked(string $locale, Request $request, int $id): JsonResponse
     {
         $animal = Animal::FindOrFail($id);
         $animal->booked = $request->only('data')['data'];
@@ -55,7 +56,7 @@ class AnimalController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function unbooked(int $id): JsonResponse
+    public function unbooked( string $locale, int $id): JsonResponse
     {
         $animal = Animal::FindOrFail($id);
         $animal->booked = null;
@@ -67,7 +68,7 @@ class AnimalController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function show($id): JsonResponse
+    public function show(string $locale, $id): JsonResponse
     {
         return response()->json([
             Animal::findOrFail($id)
@@ -76,7 +77,7 @@ class AnimalController extends Controller
         );
     }
 
-    public function update(Request $request, $id): JsonResponse
+    public function update(string $locale, AnimalRequest $request, $id): JsonResponse
     {
         $current = Animal::FindOrFail($id);
 
@@ -114,7 +115,7 @@ class AnimalController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function makeAdminArchive(int $id): JsonResponse
+    public function makeAdminArchive(string $locale, int $id): JsonResponse
     {
         $animal = Animal::FindOrFail($id);
         $animal->is_archive = Carbon::now()->format('Y-m-d');
@@ -125,7 +126,7 @@ class AnimalController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function create(Request $request): JsonResponse
+    public function create(string $locale, AnimalRequest $request): JsonResponse
     {
         $data = $request->all();
 

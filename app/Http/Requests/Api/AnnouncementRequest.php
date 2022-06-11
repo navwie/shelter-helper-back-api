@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class AnnouncementRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,17 +19,15 @@ class UserRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function rules()
     {
         return [
-            'name' => ['string', 'required'],
-            'surname' => ['string', 'required'],
-            'email' => ['string', 'required', 'unique:users,email'],
-            'phone' => ['string', 'required'],
-            'password' => ['string', 'required'],
-            'role' => ['boolean', 'required'],
+            'topic' => ['string', 'required', 'max:64'],
+            'description' => ['string', 'required', 'max:255'],
+            'shelter_id' => ['integer', 'required', 'exists:shelters,id'],
+            'done' => ['date'],
         ];
     }
 }

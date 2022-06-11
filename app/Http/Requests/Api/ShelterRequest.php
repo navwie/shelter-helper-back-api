@@ -24,12 +24,12 @@ class ShelterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['string', 'required'],
-            'address' => ['string', 'required'],
-            'email' => ['string', 'required'],
-            'phone' => ['string', 'required'],
-            'city' => ['string', 'required'],
-
+            'name' => ['string', 'required' ,'max:64'],
+            'address' => ['string', 'required', 'max:255'],
+            'email' => ['string', 'required' , 'email'],
+            'phone' => ['required', 'min:9', 'numeric'],
+            'city' => ['string', 'required','max:255'],
+            'photo' => ['required'],
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Constants\UserRoles;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Auth\RegisterFormRequest;
+use App\Http\Requests\Api\RegisterFormRequest;
 use App\Models\Shelter;
 use App\Models\User;
 use Illuminate\Http\Request;
