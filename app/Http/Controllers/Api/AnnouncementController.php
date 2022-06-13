@@ -16,10 +16,10 @@ class AnnouncementController extends Controller
     {
         $data = $request->all();
 
-        $announcement = Announcement::create($data['announcement']);
+        $announcement = Announcement::create($data);
 
         return new JsonResponse([
-            'created' => true,
+           $request->all()
         ], Response::HTTP_CREATED);
     }
 

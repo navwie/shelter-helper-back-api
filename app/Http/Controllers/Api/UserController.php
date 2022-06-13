@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\UpdateUserRequest;
 use App\Http\Requests\Api\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -21,7 +22,7 @@ class UserController extends Controller
         );
     }
 
-    public function update(string $locale, UserRequest $request, $id): JsonResponse
+    public function update(string $locale, UpdateUserRequest $request, $id): JsonResponse
     {
         $current = User::FindOrFail($id);
 

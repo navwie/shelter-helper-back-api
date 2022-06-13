@@ -24,9 +24,9 @@ class AnnouncementRequest extends FormRequest
     public function rules()
     {
         return [
-            'topic' => ['string', 'required', 'max:64'],
-            'description' => ['string', 'required', 'max:255'],
-            'shelter_id' => ['integer', 'required', 'exists:shelters,id'],
+            'topic' => ['required', 'max:64'],
+            'description' => ['required', 'max:255'],
+            'shelter_id' => ['exists:shelters,id'],
             'done' => ['date'],
         ];
     }
