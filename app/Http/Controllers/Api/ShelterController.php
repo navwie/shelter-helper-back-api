@@ -11,7 +11,6 @@ use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 
-
 class ShelterController extends Controller
 {
     public function index()
@@ -23,12 +22,12 @@ class ShelterController extends Controller
         );
     }
 
-    public function create(string $locale, ShelterRequest $request):JsonResponse
+    public function create(string $locale, ShelterRequest $request): JsonResponse
     {
         $shelterData = $request->except('user_id');
 
-        if (isset( $shelterData['photo'])) {
-            [$imageName, $imageContent] = explode('\\',  $shelterData['photo']);
+        if (isset($shelterData['photo'])) {
+            [$imageName, $imageContent] = explode('\\', $shelterData['photo']);
             $shelterData['photo'] = $imageName;
         }
         $shelter = Shelter::create($shelterData);
@@ -52,6 +51,7 @@ class ShelterController extends Controller
 
 
         return response()->json([
+            'created' => true,
             'shelter_id' => $shelter->id,
         ], Response::HTTP_OK);
     }

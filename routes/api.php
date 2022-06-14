@@ -25,26 +25,26 @@ Route::group(['middleware' => ['cors', 'locale']], function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
 
-    Route::get('/user/{id}', [UserController::class, 'show']);
-    Route::put('/user/{id}', [UserController::class, 'update']);
+    Route::get('/user/{id}', [UserController::class, 'show'])->middleware('auth:api');
+    Route::put('/user/{id}', [UserController::class, 'update'])->middleware('auth:api');
 
-    Route::post('/shelter', [ShelterController::class, 'create'])->middleware('auth:api');
-    Route::put('/shelter/{id}', [ShelterController::class, 'update'])->middleware('auth:api');
+    Route::post('/shelter', [ShelterController::class, 'create'])->middleware('auth:api', 'scope:admin');
+    Route::put('/shelter/{id}', [ShelterController::class, 'update'])->middleware('auth:api', 'scope:admin');
     Route::get('/shelter/{id}', [ShelterController::class, 'show']);
     Route::get('/shelter', [ShelterController::class, 'index']);
 
-    Route::put('/animal/archive/{id}', [AnimalController::class, 'makeAdminArchive'])->middleware('auth:api');
-    Route::put('/announcements/done/{id}', [AnnouncementController::class, 'makeAnnouncementDone'])->middleware('auth:api');
+    Route::put('/animal/archive/{id}', [AnimalController::class, 'makeAdminArchive'])->middleware('auth:api','scope:admin');
+    Route::put('/announcements/done/{id}', [AnnouncementController::class, 'makeAnnouncementDone'])->middleware('auth:api','scope:admin');
     Route::get('/animalOne/{id}', [AnimalController::class, 'show']);
     Route::get('/animal/{id}', [AnimalController::class, 'index']);
-    Route::put('/animal/unbooked/{id}', [AnimalController::class, 'unbooked']);
-    Route::put('/animal/booked/{id}', [AnimalController::class, 'booked'])->middleware('auth:api');
+    Route::put('/animal/unbooked/{id}', [AnimalController::class, 'unbooked'])->middleware('auth:api','scope:admin');
+    Route::put('/animal/booked/{id}', [AnimalController::class, 'booked'])->middleware('auth:api','scope:user');
     Route::get('/animal', [AnimalController::class, 'allAnimal']);
     Route::get('/animals/all', [AnimalController::class, 'showAnimals']);
-    Route::put('/animal/{id}', [AnimalController::class, 'update'])->middleware('auth:api');
-    Route::post('/animal', [AnimalController::class, 'create'])->middleware('auth:api');
+    Route::put('/animal/{id}', [AnimalController::class, 'update'])->middleware('auth:api','scope:admin');
+    Route::post('/animal', [AnimalController::class, 'create'])->middleware('auth:api','scope:admin');
 
-    Route::post('/announcements', [AnnouncementController::class, 'create'])->middleware('auth:api');
+    Route::post('/announcements', [AnnouncementController::class, 'create'])->middleware('auth:api','scope:admin');
     Route::get('/announcements', [AnnouncementController::class, 'index']);
     Route::get('/announcements/all', [AnnouncementController::class, 'show']);
 
