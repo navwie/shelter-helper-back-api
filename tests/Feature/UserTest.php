@@ -51,7 +51,7 @@ class UserTest extends TestCase
 //        $response = $this->postJson('/api/en/register', [
 //            'name' => 'Вероника',
 //            'surname' => "Лукянко",
-//            'email' => 'Dnцwefwefуаw@gmail.com',
+//            'email' => 'Dnfwefуаw@gmail.com',
 //            'password' => '002222103',
 //            'phone' => '+3832953204',
 //            'role' => false
@@ -59,7 +59,7 @@ class UserTest extends TestCase
 //        print_r( "\n" . $response->content());
 //        $response->assertStatus(200);
 //    }
-//
+
 //    public function testRegisterFail(): void
 //    {
 //        Artisan::call('passport:install');
@@ -100,7 +100,7 @@ class UserTest extends TestCase
 //        print_r( "\n" . "Пользователь не найден");
 //        $response->assertStatus(404);
 //    }
-
+//
 //
 //    public function testUserUpdateSuccess(): void
 //    {
@@ -153,7 +153,7 @@ class UserTest extends TestCase
 //        print_r( "\n" . $response->content());
 //
 //    }
-
+//
 //    public function testLogout(): void
 //    {
 //        Artisan::call('passport:install');
@@ -170,7 +170,7 @@ class UserTest extends TestCase
 //            ->assertStatus(200);
 //        print_r("\n" . $response->content());
 //    }
-//    public function testLogout(): void
+//    public function testLogoutFail(): void
 //    {
 //        $response = $this->json('POST', '/api/en/logout');
 //        $response
